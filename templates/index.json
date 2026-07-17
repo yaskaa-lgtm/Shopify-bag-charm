@@ -1,75 +1,159 @@
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
-          }
-        },
-        "button": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "button"
-      ],
+    "sb_marquee_top": {
+      "type": "sb-marquee",
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "image_behavior": "none",
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "text": "THE VIRAL ACCESSORIES BRAND",
+        "separator": "✦",
+        "repeat": 8,
+        "speed": 25,
+        "font_size": 15,
+        "bg_color": "#111111",
+        "text_color": "#ffffff"
       }
     },
-    "featured_collection": {
-      "type": "featured-collection",
+    "sb_hero": {
+      "type": "sb-hero",
       "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "all",
+        "brand_name": "",
+        "eyebrow": "NEW COLLECTION",
+        "heading": "STICK WITH YOUR NEW BESTIE",
+        "subtext": "Bags, bag charms & phone accessories — designed to turn the everyday into something collectible.",
+        "button_label": "Discover the Collection",
+        "button_link": "shopify://collections/all",
+        "content_position": "center",
+        "heading_size": 7,
+        "min_height": 85,
+        "overlay_opacity": 15,
+        "bg_color": "#ffe3ec",
+        "text_color": "#111111",
+        "accent_color": "#ff3d5a"
+      }
+    },
+    "sb_trending": {
+      "type": "sb-trending-tabs",
+      "blocks": {
+        "tab_new": { "type": "tab", "settings": { "label": "New In", "collection": "" } },
+        "tab_best": { "type": "tab", "settings": { "label": "Bestsellers", "collection": "" } },
+        "tab_charms": { "type": "tab", "settings": { "label": "Bag Charms", "collection": "" } }
+      },
+      "block_order": ["tab_new", "tab_best", "tab_charms"],
+      "settings": {
+        "heading": "Trending",
+        "view_all_label": "Shop All",
+        "view_all_link": "shopify://collections/all",
         "products_to_show": 8,
         "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "padding_top": 44,
-        "padding_bottom": 36
+        "accent_color": "#ff3d5a"
+      }
+    },
+    "sb_split": {
+      "type": "sb-split-banner",
+      "settings": {
+        "image_position": "left",
+        "eyebrow": "LET'S GO ON A TRIP TOGETHER",
+        "heading": "The Travel Edit",
+        "text": "<p>Pouches and travel companions for the girl who carries her world with her.</p>",
+        "button_label": "Shop the Collection",
+        "button_link": "shopify://collections/all",
+        "bg_color": "#f7d9e3",
+        "text_color": "#111111",
+        "accent_color": "#ff3d5a"
+      }
+    },
+    "sb_collections": {
+      "type": "sb-collection-grid",
+      "blocks": {
+        "c1": { "type": "collection", "settings": { "label": "Bag Charms", "collection": "" } },
+        "c2": { "type": "collection", "settings": { "label": "Phone Accessories", "collection": "" } },
+        "c3": { "type": "collection", "settings": { "label": "Bags", "collection": "" } },
+        "c4": { "type": "collection", "settings": { "label": "Accessories", "collection": "" } }
+      },
+      "block_order": ["c1", "c2", "c3", "c4"],
+      "settings": {
+        "heading": "Collections",
+        "columns_desktop": 4
+      }
+    },
+    "sb_testimonials": {
+      "type": "sb-testimonials",
+      "blocks": {
+        "r1": { "type": "review", "settings": { "rating": 5, "quote": "Absolutely love my bag — the quality is beautiful and it gives my look a fabulous extra touch.", "author": "Verified Bestie" } },
+        "r2": { "type": "review", "settings": { "rating": 5, "quote": "I sell these in my store and my customers love the quality so much.", "author": "Verified Retailer" } },
+        "r3": { "type": "review", "settings": { "rating": 5, "quote": "The phone grip is amazing — pretty, practical and it never lets go. A daily essential.", "author": "Verified Bestie" } }
+      },
+      "block_order": ["r1", "r2", "r3"],
+      "settings": {
+        "heading": "What Besties Say",
+        "bg_color": "#111111",
+        "text_color": "#ffffff",
+        "accent_color": "#ff3d5a"
+      }
+    },
+    "sb_lookbook": {
+      "type": "sb-lookbook",
+      "blocks": {
+        "l1": { "type": "look", "settings": { "title": "City Girl", "caption": "From brunch to backseat — the bags that keep up with her." } },
+        "l2": { "type": "look", "settings": { "title": "The Viral Pouches", "caption": "Every colour, every stripe — the pouch your feed keeps showing you." } },
+        "l3": { "type": "look", "settings": { "title": "It Girl Approved", "caption": "The accessories the it girls can't put down." } }
+      },
+      "block_order": ["l1", "l2", "l3"],
+      "settings": {
+        "heading": "Lookbooks",
+        "columns_desktop": 3
+      }
+    },
+    "sb_trust": {
+      "type": "sb-trust-badges",
+      "blocks": {
+        "b1": { "type": "badge", "settings": { "icon": "🔒", "title": "Secure Checkout", "text": "Pay safely online" } },
+        "b2": { "type": "badge", "settings": { "icon": "🚚", "title": "Shipping & Returns", "text": "Fast global shipping" } },
+        "b3": { "type": "badge", "settings": { "icon": "💬", "title": "Support 24/7", "text": "Chat with your besties" } }
+      },
+      "block_order": ["b1", "b2", "b3"],
+      "settings": {
+        "bg_color": "#ffffff",
+        "text_color": "#111111"
+      }
+    },
+    "sb_marquee_bottom": {
+      "type": "sb-marquee",
+      "settings": {
+        "text": "STICK WITH YOUR NEW BESTIE",
+        "separator": "✦",
+        "repeat": 8,
+        "speed": 30,
+        "font_size": 15,
+        "bg_color": "#ff3d5a",
+        "text_color": "#ffffff"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "blocks": {
+        "heading": { "type": "heading", "settings": { "heading": "Subscribe to our newsletter", "heading_size": "h1" } },
+        "paragraph": { "type": "paragraph", "settings": { "text": "<p>Be the first to know about new drops, restocks and offers.</p>" } },
+        "email_form": { "type": "email_form" }
+      },
+      "block_order": ["heading", "paragraph", "email_form"],
+      "settings": {
+        "full_width": true,
+        "color_scheme": "scheme-2",
+        "padding_top": 40,
+        "padding_bottom": 40
       }
     }
   },
   "order": [
-    "image_banner",
-    "featured_collection"
+    "sb_marquee_top",
+    "sb_hero",
+    "sb_trending",
+    "sb_split",
+    "sb_collections",
+    "sb_testimonials",
+    "sb_lookbook",
+    "sb_trust",
+    "sb_marquee_bottom",
+    "newsletter"
   ]
 }

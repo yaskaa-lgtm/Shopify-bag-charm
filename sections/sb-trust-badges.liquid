@@ -1,0 +1,85 @@
+{{ 'sb-sections.css' | asset_url | stylesheet_tag }}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    --sb-trust-bg: {{ section.settings.bg_color }};
+    --sb-trust-fg: {{ section.settings.text_color }};
+  }
+</style>
+
+<div class="sb-trust">
+  <div class="page-width sb-trust__row">
+    {%- for block in section.blocks -%}
+      <div class="sb-trust__item" {{ block.shopify_attributes }}>
+        {%- if block.settings.icon != blank -%}
+          <div class="sb-trust__icon">{{ block.settings.icon }}</div>
+        {%- endif -%}
+        {%- if block.settings.title != blank -%}
+          <h3 class="sb-trust__title">{{ block.settings.title }}</h3>
+        {%- endif -%}
+        {%- if block.settings.text != blank -%}
+          <p class="sb-trust__text">{{ block.settings.text }}</p>
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "SB Trust badges",
+  "tag": "section",
+  "class": "sb-section sb-section--trust",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#111111"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "badge",
+      "name": "Badge",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (emoji or symbol)",
+          "default": "🔒"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Secure Checkout"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Pay safely online"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SB Trust badges",
+      "blocks": [
+        { "type": "badge", "settings": { "icon": "🔒", "title": "Secure Checkout", "text": "Pay safely online" } },
+        { "type": "badge", "settings": { "icon": "🚚", "title": "Shipping & Returns", "text": "Fast global shipping" } },
+        { "type": "badge", "settings": { "icon": "💬", "title": "Support 24/7", "text": "Chat with your besties" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

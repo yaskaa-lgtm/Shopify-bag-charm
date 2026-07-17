@@ -1,0 +1,110 @@
+{{ 'sb-sections.css' | asset_url | stylesheet_tag }}
+
+<style>
+  #shopify-section-{{ section.id }} { --sb-cols: {{ section.settings.columns_desktop }}; }
+</style>
+
+<div class="sb-colgrid page-width">
+  {%- if section.settings.heading != blank -%}
+    <h2 class="sb-h2 sb-colgrid__heading">{{ section.settings.heading }}</h2>
+  {%- endif -%}
+
+  <div class="sb-colgrid__grid">
+    {%- for block in section.blocks -%}
+      {%- assign coll = block.settings.collection -%}
+      <a
+        href="{{ block.settings.link | default: coll.url | default: '#' }}"
+        class="sb-colcard"
+        {{ block.shopify_attributes }}
+      >
+        <div class="sb-colcard__media">
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 1200 | image_tag:
+              loading: 'lazy',
+              sizes: '(min-width: 990px) 33vw, 50vw',
+              widths: '300, 500, 700, 900, 1200',
+              class: 'sb-colcard__img'
+            }}
+          {%- elsif coll.featured_image != blank -%}
+            {{ coll.featured_image | image_url: width: 1200 | image_tag:
+              loading: 'lazy',
+              sizes: '(min-width: 990px) 33vw, 50vw',
+              widths: '300, 500, 700, 900, 1200',
+              class: 'sb-colcard__img'
+            }}
+          {%- else -%}
+            {{ 'collection-1' | placeholder_svg_tag: 'sb-colcard__img placeholder' }}
+          {%- endif -%}
+        </div>
+        <span class="sb-colcard__label">
+          {{ block.settings.label | default: coll.title | default: 'Collection' }}
+        </span>
+      </a>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "SB Collection grid",
+  "tag": "section",
+  "class": "sb-section sb-section--colgrid",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Collections"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "label": "Columns on desktop",
+      "default": 3
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image override (optional)"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label override (optional)"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link override (optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SB Collection grid",
+      "blocks": [
+        { "type": "collection", "settings": { "label": "Bag Charms" } },
+        { "type": "collection", "settings": { "label": "Phone Accessories" } },
+        { "type": "collection", "settings": { "label": "Bags" } },
+        { "type": "collection", "settings": { "label": "Accessories" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,180 @@
+{{ 'sb-sections.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign heading = section.settings.heading
+  assign brand = section.settings.brand_name | default: shop.name
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    --sb-hero-bg: {{ section.settings.bg_color }};
+    --sb-hero-fg: {{ section.settings.text_color }};
+    --sb-hero-accent: {{ section.settings.accent_color }};
+    --sb-hero-overlay: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+    --sb-hero-min-height: {{ section.settings.min_height }}vh;
+  }
+  #shopify-section-{{ section.id }} .sb-hero__title { font-size: clamp(2.4rem, {{ section.settings.heading_size }}vw, 9rem); }
+</style>
+
+<div class="sb-hero sb-hero--{{ section.settings.content_position }}">
+  {%- if section.settings.image != blank -%}
+    <div class="sb-hero__media">
+      {{ section.settings.image | image_url: width: 3000 | image_tag:
+        loading: 'eager',
+        sizes: '100vw',
+        widths: '600, 900, 1200, 1600, 2000, 2600, 3000',
+        class: 'sb-hero__img sb-hero__img--desktop'
+      }}
+      {%- if section.settings.image_mobile != blank -%}
+        {{ section.settings.image_mobile | image_url: width: 1400 | image_tag:
+          loading: 'eager',
+          sizes: '100vw',
+          widths: '400, 600, 800, 1100, 1400',
+          class: 'sb-hero__img sb-hero__img--mobile'
+        }}
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <div class="sb-hero__overlay"></div>
+
+  <div class="sb-hero__content page-width">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="sb-hero__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+    {%- if heading != blank -%}
+      <h1 class="sb-hero__title">{{ heading | replace: '[brand]', brand }}</h1>
+    {%- endif -%}
+    {%- if section.settings.subtext != blank -%}
+      <p class="sb-hero__subtext">{{ section.settings.subtext }}</p>
+    {%- endif -%}
+    {%- if section.settings.button_label != blank -%}
+      <a
+        href="{{ section.settings.button_link | default: '#' }}"
+        class="sb-btn sb-btn--accent sb-hero__cta"
+      >
+        {{ section.settings.button_label }}
+      </a>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "SB Hero",
+  "tag": "section",
+  "class": "sb-section sb-section--hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand name",
+      "info": "Leave blank to use your store name. Use [brand] inside the headline to insert it.",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow (small text above heading)",
+      "default": "NEW COLLECTION"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Headline",
+      "default": "STICK WITH YOUR NEW BESTIE"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Bags, bag charms & phone accessories — designed to turn the everyday into something collectible."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Discover the Collection"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image (desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Background image (mobile, optional)"
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Content position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 4,
+      "max": 12,
+      "step": 1,
+      "unit": "vw",
+      "label": "Headline size",
+      "default": 7
+    },
+    {
+      "type": "range",
+      "id": "min_height",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "label": "Section height",
+      "default": 85
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "label": "Image overlay",
+      "default": 15
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background (if no image)",
+      "default": "#ffe3ec"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Button accent",
+      "default": "#ff3d5a"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SB Hero"
+    }
+  ]
+}
+{% endschema %}

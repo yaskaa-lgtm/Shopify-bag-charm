@@ -1,0 +1,168 @@
+{{ 'sb-sections.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign products_to_show = section.settings.products_to_show
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    --sb-accent: {{ section.settings.accent_color }};
+    --sb-cols: {{ section.settings.columns_desktop }};
+  }
+</style>
+
+<div class="sb-trending page-width" data-sb-tabs>
+  <div class="sb-trending__head">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="sb-h2">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    <div class="sb-trending__tabs" role="tablist">
+      {%- for block in section.blocks -%}
+        <button
+          type="button"
+          class="sb-tab{% if forloop.first %} is-active{% endif %}"
+          role="tab"
+          aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+          data-sb-tab="{{ block.id }}"
+          {{ block.shopify_attributes }}
+        >
+          {{ block.settings.label | default: block.settings.collection.title | default: 'Tab' }}
+        </button>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.view_all_link != blank -%}
+      <a href="{{ section.settings.view_all_link }}" class="sb-trending__viewall">
+        {{ section.settings.view_all_label | default: 'Shop All' }}
+      </a>
+    {%- endif -%}
+  </div>
+
+  {%- for block in section.blocks -%}
+    {%- assign collection = block.settings.collection -%}
+    <div
+      class="sb-trending__panel{% if forloop.first %} is-active{% endif %}"
+      data-sb-panel="{{ block.id }}"
+      role="tabpanel"
+      {% unless forloop.first %}hidden{% endunless %}
+    >
+      <div class="sb-product-grid">
+        {%- if collection != blank and collection.products.size > 0 -%}
+          {%- for product in collection.products limit: products_to_show -%}
+            {% render 'sb-product-card', product: product %}
+          {%- endfor -%}
+        {%- else -%}
+          {%- for i in (1..products_to_show) -%}
+            {% render 'sb-product-card', product: blank %}
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endfor -%}
+</div>
+
+<script>
+  (function () {
+    var root = document.querySelector('#shopify-section-{{ section.id }} [data-sb-tabs]');
+    if (!root) return;
+    var tabs = root.querySelectorAll('[data-sb-tab]');
+    var panels = root.querySelectorAll('[data-sb-panel]');
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        var id = tab.getAttribute('data-sb-tab');
+        tabs.forEach(function (t) {
+          var active = t === tab;
+          t.classList.toggle('is-active', active);
+          t.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+        panels.forEach(function (p) {
+          var match = p.getAttribute('data-sb-panel') === id;
+          p.classList.toggle('is-active', match);
+          if (match) { p.removeAttribute('hidden'); } else { p.setAttribute('hidden', ''); }
+        });
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "SB Trending tabs",
+  "tag": "section",
+  "class": "sb-section sb-section--trending",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Trending"
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "View all label",
+      "default": "Shop All"
+    },
+    {
+      "type": "url",
+      "id": "view_all_link",
+      "label": "View all link"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "label": "Products per tab",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "label": "Columns on desktop",
+      "default": 4
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent",
+      "default": "#ff3d5a"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Tab label",
+          "info": "Leave blank to use the collection name."
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SB Trending tabs",
+      "blocks": [
+        { "type": "tab", "settings": { "label": "New In" } },
+        { "type": "tab", "settings": { "label": "Bestsellers" } },
+        { "type": "tab", "settings": { "label": "Bag Charms" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

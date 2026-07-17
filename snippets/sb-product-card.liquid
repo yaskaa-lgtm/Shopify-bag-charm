@@ -1,0 +1,72 @@
+{%- comment -%}
+  Renders a stickybestie-style product card.
+  Accepts: product (a product object, or blank for a placeholder).
+{%- endcomment -%}
+
+{%- if product == blank -%}
+  <div class="sb-card sb-card--placeholder">
+    <a href="#" class="sb-card__media">
+      {{ 'product-apparel-1' | placeholder_svg_tag: 'sb-card__img placeholder' }}
+    </a>
+    <div class="sb-card__info">
+      <h3 class="sb-card__title">Product title</h3>
+      <span class="sb-card__price">€0,00</span>
+    </div>
+  </div>
+{%- else -%}
+  <div class="sb-card">
+    <a href="{{ product.url }}" class="sb-card__media">
+      {%- if product.featured_media -%}
+        {{ product.featured_media | image_url: width: 800 | image_tag:
+          loading: 'lazy',
+          sizes: '(min-width: 990px) 25vw, 50vw',
+          widths: '200, 300, 400, 600, 800',
+          class: 'sb-card__img'
+        }}
+        {%- if product.media[1] != blank -%}
+          {{ product.media[1] | image_url: width: 800 | image_tag:
+            loading: 'lazy',
+            sizes: '(min-width: 990px) 25vw, 50vw',
+            widths: '200, 300, 400, 600, 800',
+            class: 'sb-card__img sb-card__img--hover'
+          }}
+        {%- endif -%}
+      {%- else -%}
+        {{ 'product-apparel-1' | placeholder_svg_tag: 'sb-card__img placeholder' }}
+      {%- endif -%}
+
+      {%- if product.compare_at_price > product.price -%}
+        <span class="sb-card__badge">Sale</span>
+      {%- elsif product.available == false -%}
+        <span class="sb-card__badge sb-card__badge--sold">Sold out</span>
+      {%- endif -%}
+    </a>
+
+    <div class="sb-card__info">
+      <h3 class="sb-card__title">
+        <a href="{{ product.url }}">{{ product.title }}</a>
+      </h3>
+      <span class="sb-card__price">
+        {%- if product.compare_at_price > product.price -%}
+          <s>{{ product.compare_at_price | money }}</s>
+          <span class="sb-card__price--sale">{{ product.price | money }}</span>
+        {%- else -%}
+          {{ product.price | money }}
+        {%- endif -%}
+      </span>
+    </div>
+
+    {%- if product.available -%}
+      {%- if product.variants.size == 1 -%}
+        {%- form 'product', product, class: 'sb-card__form' -%}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          <button type="submit" name="add" class="sb-btn sb-btn--card">Add to Cart</button>
+        {%- endform -%}
+      {%- else -%}
+        <a href="{{ product.url }}" class="sb-btn sb-btn--card">Choose Options</a>
+      {%- endif -%}
+    {%- else -%}
+      <button type="button" class="sb-btn sb-btn--card is-disabled" disabled>Sold Out</button>
+    {%- endif -%}
+  </div>
+{%- endif -%}

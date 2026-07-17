@@ -1,0 +1,96 @@
+{{ 'sb-sections.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign text = section.settings.text | default: 'THE VIRAL ACCESSORIES BRAND'
+  assign repeat = section.settings.repeat | default: 8
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    --sb-marquee-bg: {{ section.settings.bg_color }};
+    --sb-marquee-fg: {{ section.settings.text_color }};
+    --sb-marquee-duration: {{ section.settings.speed }}s;
+    --sb-marquee-size: {{ section.settings.font_size }}px;
+  }
+</style>
+
+<div class="sb-marquee" role="marquee" aria-label="{{ text | escape }}">
+  <div class="sb-marquee__track">
+    {%- for i in (1..2) -%}
+      <div class="sb-marquee__group" {% if i == 2 %}aria-hidden="true"{% endif %}>
+        {%- for j in (1..repeat) -%}
+          <span class="sb-marquee__item">{{ text }}</span>
+          <span class="sb-marquee__sep">{{ section.settings.separator }}</span>
+        {%- endfor -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "SB Marquee bar",
+  "tag": "section",
+  "class": "sb-section sb-section--marquee",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Marquee text",
+      "default": "THE VIRAL ACCESSORIES BRAND"
+    },
+    {
+      "type": "text",
+      "id": "separator",
+      "label": "Separator between repeats",
+      "default": "✦"
+    },
+    {
+      "type": "range",
+      "id": "repeat",
+      "min": 2,
+      "max": 20,
+      "step": 1,
+      "label": "Repeats per loop",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 5,
+      "max": 60,
+      "step": 1,
+      "unit": "s",
+      "label": "Scroll duration (lower = faster)",
+      "default": 25
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "min": 10,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 15
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SB Marquee bar"
+    }
+  ]
+}
+{% endschema %}
