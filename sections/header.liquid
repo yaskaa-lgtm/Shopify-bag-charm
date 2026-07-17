@@ -17,6 +17,15 @@
 {%- endif -%}
 
 <style>
+  .charme-wordmark {
+    display: inline-block;
+    line-height: 0;
+  }
+  .charme-wordmark svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
   header-drawer {
     justify-self: start;
     margin-left: -1.2rem;
@@ -172,7 +181,9 @@
             }}
           </div>
         {%- else -%}
-          <span class="h2">{{ shop.name }}</span>
+          <span class="charme-wordmark" style="width: {{ settings.logo_width | default: 120 }}px; max-width: 45vw;" aria-label="{{ shop.name | default: 'Charmé' | escape }}">
+            {{ 'charme-wordmark-ink.svg' | inline_asset_content }}
+          </span>
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}
@@ -215,7 +226,9 @@
             }}
           </div>
         {%- else -%}
-          <span class="h2">{{ shop.name }}</span>
+          <span class="charme-wordmark" style="width: {{ settings.logo_width | default: 120 }}px; max-width: 45vw;" aria-label="{{ shop.name | default: 'Charmé' | escape }}">
+            {{ 'charme-wordmark-ink.svg' | inline_asset_content }}
+          </span>
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}

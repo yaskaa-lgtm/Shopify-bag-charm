@@ -3,31 +3,31 @@
     "sb_marquee_top": {
       "type": "sb-marquee",
       "settings": {
-        "text": "THE VIRAL ACCESSORIES BRAND",
+        "text": "ELEVATED LITTLE CHARMS",
         "separator": "✦",
         "repeat": 8,
         "speed": 25,
         "font_size": 15,
-        "bg_color": "#111111",
-        "text_color": "#ffffff"
+        "bg_color": "#1C1B19",
+        "text_color": "#F6F1E7"
       }
     },
     "sb_hero": {
       "type": "sb-hero",
       "settings": {
-        "brand_name": "",
+        "brand_name": "Charmé",
         "eyebrow": "NEW COLLECTION",
-        "heading": "STICK WITH YOUR NEW BESTIE",
-        "subtext": "Bags, bag charms & phone accessories — designed to turn the everyday into something collectible.",
-        "button_label": "Discover the Collection",
+        "heading": "The little charm that makes your bag feel brand new.",
+        "subtext": "Enamel-and-metal charms that clip onto any bag, tote, or strap — and photograph like they cost a lot more.",
+        "button_label": "Shop the Charm",
         "button_link": "shopify://collections/all",
         "content_position": "center",
-        "heading_size": 7,
-        "min_height": 85,
+        "heading_size": 6,
+        "min_height": 82,
         "overlay_opacity": 15,
-        "bg_color": "#ffe3ec",
-        "text_color": "#111111",
-        "accent_color": "#ff3d5a"
+        "bg_color": "#F6F1E7",
+        "text_color": "#1C1B19",
+        "accent_color": "#E4572E"
       }
     },
     "sb_trending": {
@@ -35,7 +35,7 @@
       "blocks": {
         "tab_new": { "type": "tab", "settings": { "label": "New In", "collection": "" } },
         "tab_best": { "type": "tab", "settings": { "label": "Bestsellers", "collection": "" } },
-        "tab_charms": { "type": "tab", "settings": { "label": "Bag Charms", "collection": "" } }
+        "tab_charms": { "type": "tab", "settings": { "label": "Gift Sets", "collection": "" } }
       },
       "block_order": ["tab_new", "tab_best", "tab_charms"],
       "settings": {
@@ -44,95 +44,95 @@
         "view_all_link": "shopify://collections/all",
         "products_to_show": 8,
         "columns_desktop": 4,
-        "accent_color": "#ff3d5a"
+        "accent_color": "#E4572E"
       }
     },
     "sb_split": {
       "type": "sb-split-banner",
       "settings": {
         "image_position": "left",
-        "eyebrow": "LET'S GO ON A TRIP TOGETHER",
-        "heading": "The Travel Edit",
-        "text": "<p>Pouches and travel companions for the girl who carries her world with her.</p>",
-        "button_label": "Shop the Collection",
+        "eyebrow": "MADE TO BE PHOTOGRAPHED",
+        "heading": "One clip. A whole new bag.",
+        "text": "<p>Real enamel on solid metal — weighty, cool to the touch, and built to move from your work tote to your night-out bag in two seconds.</p>",
+        "button_label": "Shop the Charm",
         "button_link": "shopify://collections/all",
-        "bg_color": "#f7d9e3",
-        "text_color": "#111111",
-        "accent_color": "#ff3d5a"
+        "bg_color": "#4E7C82",
+        "text_color": "#FFFFFF",
+        "accent_color": "#E4572E"
       }
     },
     "sb_collections": {
       "type": "sb-collection-grid",
       "blocks": {
         "c1": { "type": "collection", "settings": { "label": "Bag Charms", "collection": "" } },
-        "c2": { "type": "collection", "settings": { "label": "Phone Accessories", "collection": "" } },
-        "c3": { "type": "collection", "settings": { "label": "Bags", "collection": "" } },
-        "c4": { "type": "collection", "settings": { "label": "Accessories", "collection": "" } }
+        "c2": { "type": "collection", "settings": { "label": "New In", "collection": "" } },
+        "c3": { "type": "collection", "settings": { "label": "Gift Sets", "collection": "" } },
+        "c4": { "type": "collection", "settings": { "label": "Bestsellers", "collection": "" } }
       },
       "block_order": ["c1", "c2", "c3", "c4"],
       "settings": {
-        "heading": "Collections",
+        "heading": "Shop",
         "columns_desktop": 4
       }
     },
     "sb_testimonials": {
       "type": "sb-testimonials",
       "blocks": {
-        "r1": { "type": "review", "settings": { "rating": 5, "quote": "Absolutely love my bag — the quality is beautiful and it gives my look a fabulous extra touch.", "author": "Verified Bestie" } },
-        "r2": { "type": "review", "settings": { "rating": 5, "quote": "I sell these in my store and my customers love the quality so much.", "author": "Verified Retailer" } },
-        "r3": { "type": "review", "settings": { "rating": 5, "quote": "The phone grip is amazing — pretty, practical and it never lets go. A daily essential.", "author": "Verified Bestie" } }
+        "r1": { "type": "review", "settings": { "rating": 5, "quote": "Absolutely love it — the quality is beautiful and it gives my everyday bag a fabulous extra touch.", "author": "Verified Buyer" } },
+        "r2": { "type": "review", "settings": { "rating": 5, "quote": "So much heavier and nicer than the $5 charms everywhere. It actually feels premium.", "author": "Verified Buyer" } },
+        "r3": { "type": "review", "settings": { "rating": 5, "quote": "Clips onto anything and photographs beautifully. Bought two more as gifts.", "author": "Verified Buyer" } }
       },
       "block_order": ["r1", "r2", "r3"],
       "settings": {
-        "heading": "What Besties Say",
-        "bg_color": "#111111",
-        "text_color": "#ffffff",
-        "accent_color": "#ff3d5a"
+        "heading": "What They're Saying",
+        "bg_color": "#1C1B19",
+        "text_color": "#F6F1E7",
+        "accent_color": "#C9A227"
       }
     },
     "sb_lookbook": {
       "type": "sb-lookbook",
       "blocks": {
-        "l1": { "type": "look", "settings": { "title": "City Girl", "caption": "From brunch to backseat — the bags that keep up with her." } },
-        "l2": { "type": "look", "settings": { "title": "The Viral Pouches", "caption": "Every colour, every stripe — the pouch your feed keeps showing you." } },
-        "l3": { "type": "look", "settings": { "title": "It Girl Approved", "caption": "The accessories the it girls can't put down." } }
+        "l1": { "type": "look", "settings": { "title": "Clip It On", "caption": "Any handle, strap, or ring — in two seconds." } },
+        "l2": { "type": "look", "settings": { "title": "Make It Yours", "caption": "One pop of color does the work." } },
+        "l3": { "type": "look", "settings": { "title": "Gift-Ready", "caption": "Under $30, and it looks like more." } }
       },
       "block_order": ["l1", "l2", "l3"],
       "settings": {
-        "heading": "Lookbooks",
+        "heading": "The Edit",
         "columns_desktop": 3
       }
     },
     "sb_trust": {
       "type": "sb-trust-badges",
       "blocks": {
-        "b1": { "type": "badge", "settings": { "icon": "🔒", "title": "Secure Checkout", "text": "Pay safely online" } },
-        "b2": { "type": "badge", "settings": { "icon": "🚚", "title": "Shipping & Returns", "text": "Fast global shipping" } },
-        "b3": { "type": "badge", "settings": { "icon": "💬", "title": "Support 24/7", "text": "Chat with your besties" } }
+        "b1": { "type": "badge", "settings": { "icon": "🇺🇸", "title": "Ships From the US", "text": "8–15 days, tracked" } },
+        "b2": { "type": "badge", "settings": { "icon": "↩️", "title": "30-Day Returns", "text": "Shop with confidence" } },
+        "b3": { "type": "badge", "settings": { "icon": "🔒", "title": "Secure Checkout", "text": "Pay safely online" } }
       },
       "block_order": ["b1", "b2", "b3"],
       "settings": {
-        "bg_color": "#ffffff",
-        "text_color": "#111111"
+        "bg_color": "#F6F1E7",
+        "text_color": "#1C1B19"
       }
     },
     "sb_marquee_bottom": {
       "type": "sb-marquee",
       "settings": {
-        "text": "STICK WITH YOUR NEW BESTIE",
+        "text": "MAKES THE BAG YOU LOVE FEEL NEW AGAIN",
         "separator": "✦",
-        "repeat": 8,
+        "repeat": 6,
         "speed": 30,
         "font_size": 15,
-        "bg_color": "#ff3d5a",
-        "text_color": "#ffffff"
+        "bg_color": "#E4572E",
+        "text_color": "#1C1B19"
       }
     },
     "newsletter": {
       "type": "newsletter",
       "blocks": {
-        "heading": { "type": "heading", "settings": { "heading": "Subscribe to our newsletter", "heading_size": "h1" } },
-        "paragraph": { "type": "paragraph", "settings": { "text": "<p>Be the first to know about new drops, restocks and offers.</p>" } },
+        "heading": { "type": "heading", "settings": { "heading": "Join the list", "heading_size": "h1" } },
+        "paragraph": { "type": "paragraph", "settings": { "text": "<p>Be the first to know about new drops, restocks, and offers.</p>" } },
         "email_form": { "type": "email_form" }
       },
       "block_order": ["heading", "paragraph", "email_form"],
