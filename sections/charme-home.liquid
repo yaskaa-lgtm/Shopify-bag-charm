@@ -68,6 +68,9 @@
   /* ---- Charm illustration ---- */
   .charme-page .charm-badge{width:min(78%,320px);aspect-ratio:1;background:var(--cream);border:3px solid var(--ink);border-radius:50%;display:grid;place-items:center;box-shadow:10px 10px 0 var(--ink)}
   .charme-page .charm-badge svg{width:62%}
+  .charme-page .charm-badge--photo{overflow:hidden;background:var(--cream)}
+  .charme-page .charm-badge--photo img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+  .charme-page .mini--photo{width:82%;height:82%;object-fit:contain;filter:drop-shadow(6px 6px 0 rgba(28,27,25,.18))}
   /* ---- Trust bar ---- */
   .charme-page .trust{background:var(--ink);color:var(--cream)}
   .charme-page .trust__grid{display:grid;grid-template-columns:1fr;gap:0}
@@ -156,6 +159,12 @@
   }
 </style>
 
+{%- liquid
+  assign prod_img = section.settings.product_image
+  assign hero_img = section.settings.hero_image | default: prod_img
+  assign look_img = section.settings.lookbook_image | default: prod_img
+-%}
+
 <div class="charme-page">
 
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -207,8 +216,14 @@
           <a href="#shop" class="cta">Shop the charm <span class="price">$24.99</span></a>
         </div>
         <div class="hero__vis">
-          {%- if section.settings.hero_image != blank -%}
-            {{ section.settings.hero_image | image_url: width: 1200 | image_tag: loading: 'eager', class: 'charme-hero-img', style: 'width:100%;height:100%;object-fit:cover;position:absolute;inset:0' }}
+          {%- if hero_img != blank -%}
+            <div class="charm-badge charm-badge--photo">
+              {{ hero_img | image_url: width: 900 | image_tag:
+                loading: 'eager',
+                alt: hero_img.alt | default: 'Charmé bag charm',
+                widths: '300, 500, 700, 900'
+              }}
+            </div>
           {%- else -%}
             <div class="charm-badge"><svg viewBox="0 0 120 120"><use href="#charm"/></svg></div>
             <div class="slot-note">Image slot · hero-lifestyle 1080×1350</div>
@@ -234,7 +249,13 @@
       <div class="h2">Meet the charm</div>
       <div class="bundles" id="bundles" style="margin-top:34px">
         <div class="card">
-          <div class="card__top"><span class="tag">Bestseller</span><svg class="mini" viewBox="0 0 120 120"><use href="#charm"/></svg></div>
+          <div class="card__top"><span class="tag">Bestseller</span>
+            {%- if prod_img != blank -%}
+              {{ prod_img | image_url: width: 700 | image_tag: loading: 'lazy', class: 'mini mini--photo', alt: prod_img.alt | default: 'Charmé bag charm', widths: '300, 500, 700' }}
+            {%- else -%}
+              <svg class="mini" viewBox="0 0 120 120"><use href="#charm"/></svg>
+            {%- endif -%}
+          </div>
           <div class="card__body">
             <h3>The Charm — Single</h3>
             <span class="save">One clip. A whole new bag.</span>
@@ -243,7 +264,13 @@
           </div>
         </div>
         <div class="card">
-          <div class="card__top"><span class="tag" style="background:var(--gold);color:var(--ink)">Save $11</span><svg class="mini" viewBox="0 0 120 120"><use href="#charm"/></svg></div>
+          <div class="card__top"><span class="tag" style="background:var(--gold);color:var(--ink)">Save $11</span>
+            {%- if prod_img != blank -%}
+              {{ prod_img | image_url: width: 700 | image_tag: loading: 'lazy', class: 'mini mini--photo', alt: prod_img.alt | default: 'Charmé bag charm two-pack', widths: '300, 500, 700' }}
+            {%- else -%}
+              <svg class="mini" viewBox="0 0 120 120"><use href="#charm"/></svg>
+            {%- endif -%}
+          </div>
           <div class="card__body">
             <h3>Mix &amp; Match — x2</h3>
             <span class="save">Two moods, one strap</span>
@@ -252,7 +279,13 @@
           </div>
         </div>
         <div class="card">
-          <div class="card__top"><span class="tag" style="background:var(--persimmon)">Free ship</span><svg class="mini" viewBox="0 0 120 120"><use href="#charm"/></svg></div>
+          <div class="card__top"><span class="tag" style="background:var(--persimmon)">Free ship</span>
+            {%- if prod_img != blank -%}
+              {{ prod_img | image_url: width: 700 | image_tag: loading: 'lazy', class: 'mini mini--photo', alt: prod_img.alt | default: 'Charmé bag charm gift set', widths: '300, 500, 700' }}
+            {%- else -%}
+              <svg class="mini" viewBox="0 0 120 120"><use href="#charm"/></svg>
+            {%- endif -%}
+          </div>
           <div class="card__body">
             <h3>Gift Set — x3</h3>
             <span class="save">Sorted for three people (or you)</span>
@@ -294,8 +327,14 @@
     <div class="wrap" style="padding:0">
       <div class="look__grid">
         <div class="look__vis">
-          {%- if section.settings.lookbook_image != blank -%}
-            {{ section.settings.lookbook_image | image_url: width: 1200 | image_tag: loading: 'lazy', style: 'width:100%;height:100%;object-fit:cover;position:absolute;inset:0' }}
+          {%- if look_img != blank -%}
+            <div class="charm-badge charm-badge--photo" style="box-shadow:10px 10px 0 var(--cream)">
+              {{ look_img | image_url: width: 900 | image_tag:
+                loading: 'lazy',
+                alt: look_img.alt | default: 'Charmé bag charm styled on a bag',
+                widths: '300, 500, 700, 900'
+              }}
+            </div>
           {%- else -%}
             <div class="charm-badge" style="box-shadow:10px 10px 0 var(--cream)"><svg viewBox="0 0 120 120"><use href="#charm"/></svg></div>
             <div class="slot-note">Image slot · lookbook 1080×1350</div>
@@ -405,13 +444,19 @@
     },
     {
       "type": "image_picker",
+      "id": "product_image",
+      "label": "Product photo (used everywhere)",
+      "info": "Upload once — fills the hero, all 3 bundle cards, and the lookbook."
+    },
+    {
+      "type": "image_picker",
       "id": "hero_image",
-      "label": "Hero image (replaces the placeholder badge)"
+      "label": "Hero image override (optional)"
     },
     {
       "type": "image_picker",
       "id": "lookbook_image",
-      "label": "Lookbook image"
+      "label": "Lookbook image override (optional)"
     },
     {
       "type": "textarea",
