@@ -1,0 +1,4 @@
+{
+  "sections": { "main": { "type": "charme-legal", "settings": { "policy_type": "terms" } } },
+  "order": ["main"]
+}

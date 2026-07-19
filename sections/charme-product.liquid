@@ -1,0 +1,209 @@
+{%- comment -%} Charmé product page. Tiers map to real product variants; add-to-cart posts to the real cart. {%- endcomment -%}
+{%- liquid
+  assign product = section.settings.product | default: product
+  assign current = product.selected_or_first_available_variant
+-%}
+
+<div class="wrap"><div class="crumb"><a href="{{ routes.root_url }}">Home</a> / <a href="{{ routes.all_products_collection_url }}">Shop</a> / {{ product.title | default: 'The Charm' }}</div></div>
+
+<div class="wrap">
+  <div class="pdp">
+    <!-- gallery -->
+    <div class="gallery">
+      <div class="gallery__main" id="pdpMain">
+        {%- if product.featured_media -%}
+          {{ product.featured_media | image_url: width: 1200 | image_tag: loading: 'eager', id: 'pdpMainImg', alt: product.title, widths: '400,600,900,1200' }}
+        {%- else -%}
+          <div class="charm-badge"><svg viewBox="0 0 120 120"><use href="#charm"/></svg></div>
+          <div class="slot-note">Image slot · product-main 1080×1350</div>
+        {%- endif -%}
+      </div>
+      <div class="gallery__thumbs">
+        {%- if product.media.size > 0 -%}
+          {%- for media in product.media limit: 4 -%}
+            <div class="thumb" data-full="{{ media | image_url: width: 1200 }}">{{ media | image_url: width: 300 | image_tag: loading: 'lazy', alt: product.title }}</div>
+          {%- endfor -%}
+        {%- else -%}
+          <div class="thumb"><svg viewBox="0 0 120 120"><use href="#charm"/></svg></div>
+          <div class="thumb"><svg viewBox="0 0 120 120"><use href="#charm"/></svg></div>
+          <div class="thumb"><svg viewBox="0 0 120 120"><use href="#charm"/></svg></div>
+          <div class="thumb"><svg viewBox="0 0 120 120"><use href="#charm"/></svg></div>
+        {%- endif -%}
+      </div>
+      <p style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em">Add up to 4+ photos: main, on-bag lifestyle, scale-in-hand, packaging</p>
+    </div>
+
+    <!-- buy box -->
+    <div class="buybox" id="bundles">
+      <div class="eyebrow">The it-girl bag charm</div>
+      <h1>{{ product.title | default: 'The Charm' }}</h1>
+      <div class="stars">★★★★★ <small>4.9 · sample rating</small></div>
+      <div class="prices">
+        <span class="now" id="price">{{ current.price | money }}</span>
+        {%- if current.compare_at_price > current.price -%}<span class="was">{{ current.compare_at_price | money }}</span>{%- endif -%}
+        <span class="off" id="offBadge"{% unless current.compare_at_price > current.price %} style="display:none"{% endunless %}>Sale</span>
+      </div>
+      {%- if product.description != blank -%}
+        <div class="sub">{{ product.description }}</div>
+      {%- else -%}
+        <p class="sub">Elevated clip-on charm that refreshes any bag in one clip — swap it, stack it, gift it.</p>
+      {%- endif -%}
+
+      {%- form 'product', product, id: 'charmeAddForm' -%}
+        <input type="hidden" name="id" id="variantId" value="{{ current.id }}">
+        <input type="hidden" name="properties[Colorway]" id="colorwayInput" value="Goldenhour">
+
+        <div class="opt-label">Colorway — <span id="wayname" style="color:var(--persimmon)">Goldenhour</span></div>
+        <div class="swatches" role="radiogroup" aria-label="Colorway">
+          <span class="swatch" style="background:var(--gold)" data-name="Goldenhour" aria-checked="true" role="radio" tabindex="0"></span>
+          <span class="swatch" style="background:var(--persimmon)" data-name="Spritz" aria-checked="false" role="radio" tabindex="0"></span>
+          <span class="swatch" style="background:var(--patina)" data-name="Patina" aria-checked="false" role="radio" tabindex="0"></span>
+          <span class="swatch" style="background:var(--ink)" data-name="Noir" aria-checked="false" role="radio" tabindex="0"></span>
+          <span class="swatch" style="background:var(--cream)" data-name="Crème" aria-checked="false" role="radio" tabindex="0"></span>
+        </div>
+
+        <div class="opt-label">Choose your set</div>
+        <div class="tiers" role="radiogroup" aria-label="Set">
+          {%- for variant in product.variants -%}
+            <div class="tier" role="radio" tabindex="0"
+                 data-vid="{{ variant.id }}"
+                 data-price="{{ variant.price | money }}"
+                 data-compare="{{ variant.compare_at_price | money }}"
+                 data-hascompare="{% if variant.compare_at_price > variant.price %}1{% else %}0{% endif %}"
+                 aria-checked="{% if variant.id == current.id %}true{% else %}false{% endif %}">
+              <div class="l"><b>{{ variant.title }}</b>
+                {%- if variant.compare_at_price > variant.price -%}<small>Save {{ variant.compare_at_price | minus: variant.price | money }}</small>{%- endif -%}
+              </div>
+              <div class="r">{{ variant.price | money }}</div>
+            </div>
+          {%- else -%}
+            <div class="tier" aria-checked="true"><div class="l"><b>The Charm</b></div><div class="r">$24.99</div></div>
+          {%- endfor -%}
+        </div>
+
+        <button type="submit" class="cta"{% unless product.available %} disabled{% endunless %} style="width:100%;justify-content:center;margin-top:14px">
+          {%- if product.available -%}Add to bag · <span id="ctaPrice">{{ current.price | money }}</span>{%- else -%}Sold out{%- endif -%}
+        </button>
+      {%- endform -%}
+
+      <div class="reassure"><span>Ships in 8–15 days</span><span>Tracked delivery</span><span>30-day returns</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:14px">Delivery to the US: typically 8–15 days after dispatch, tracked. Exact window shown at checkout.</p>
+    </div>
+  </div>
+</div>
+
+<!-- BULLETS -->
+<section class="block">
+  <div class="wrap">
+    <div class="kicker">Why it's worth $24.99</div>
+    <div class="h2">The details that photograph</div>
+    <div class="bullets">
+      <div class="bullet"><b>Instant glow-up</b><p>Transform a plain tote or your everyday designer bag in one clip.</p></div>
+      <div class="bullet"><b>Built to last</b><p>Real leather with solid gold-tone hardware — not flimsy plastic that chips in a month.</p></div>
+      <div class="bullet"><b>Swap your mood</b><p>Light enough to change daily, secure enough to trust on a real bag.</p></div>
+      <div class="bullet"><b>Gift-ready</b><p>Arrives in a clean little box — the easy "just because" or stocking-stuffer.</p></div>
+      <div class="bullet"><b>Ships fast, tracked</b><p>Dispatched with tracking and a clear delivery window. No guessing.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- OBJECTIONS -->
+<section class="block">
+  <div class="wrap">
+    <div class="kicker">Straight answers</div>
+    <div class="h2">Before you ask</div>
+    <div class="acc">
+      <details open><summary>Won't it scratch my bag?</summary><div class="body">The clasp is smooth gold-tone hardware designed to sit against leather without marking it — a jewelry-grade lobster clasp, not a raw metal hook.</div></details>
+      <details><summary>Is it going to look cheap?</summary><div class="body">No. It's real pebbled leather with substantial hardware, not hollow plastic — that's the whole point of the brand. Zoom in on the product shots and you'll see the difference.</div></details>
+      <details><summary>How long is shipping, honestly?</summary><div class="body">Orders ship in 1–2 business days. Delivery to the US typically takes 8–15 days after dispatch. Every order is tracked, and the exact window is shown at checkout.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="block">
+  <div class="wrap">
+    <div class="kicker">FAQ</div>
+    <div class="h2">Everything else</div>
+    <div class="acc">
+      <details><summary>What's it made of?</summary><div class="body">Pebbled leather with gold-tone hardware and a zip closure. Weighted to feel substantial, not tinny.</div></details>
+      <details><summary>Will it fit my bag?</summary><div class="body">Yes — the universal lobster clasp fits totes, handbags, backpacks, and keyrings.</div></details>
+      <details><summary>How big is it?</summary><div class="body">Pocket-sized — big enough to hold a card, cash or lip balm, small enough to hang as a charm.</div></details>
+      <details><summary>Can I gift it?</summary><div class="body">It arrives in a giftable box. The x3 Gift Set is our most-gifted option.</div></details>
+      <details><summary>What's your shipping time?</summary><div class="body">Ships in 1–2 days; typically 8–15 days to the US after dispatch, tracked.</div></details>
+      <details><summary>Do you ship internationally?</summary><div class="body">Currently US-focused. International options are listed at checkout where available.</div></details>
+      <details><summary>What's your return policy?</summary><div class="body">30-day returns on unused items in original condition. See our <a href="/pages/refund-policy" style="color:var(--persimmon);text-decoration:underline">Refund Policy</a>.</div></details>
+      <details><summary>How do I care for it?</summary><div class="body">Wipe with a dry cloth and keep it away from water to protect the leather.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="block">
+  <div class="wrap">
+    <div class="kicker">What buyers say</div>
+    <div class="h2">Verified &amp; obsessed</div>
+    <div class="reviews">
+      <div class="review"><div class="stars">★★★★★</div><p>"Way heavier and nicer than I expected — looks like it cost triple. Everyone at brunch asked."</p><div class="who">★ Verified buyer</div></div>
+      <div class="review"><div class="stars">★★★★★</div><p>"Bought one, came back for the gift set. The little box makes it feel expensive."</p><div class="who">★ Verified buyer</div></div>
+      <div class="review"><div class="stars">★★★★★</div><p>"Clips on solid, hasn't scratched my bag, and it actually photographs. Rare."</p><div class="who">★ Verified buyer</div></div>
+    </div>
+    <p style="font-size:12px;color:var(--muted);margin-top:16px">Sample reviews shown — replace with real Judge.me reviews before launch (FTC).</p>
+  </div>
+</section>
+
+<!-- GIFT -->
+<div class="gift" style="background:var(--persimmon);color:var(--cream);text-align:center;border-bottom:2px solid var(--ink)">
+  <div class="wrap" style="padding:0"><div class="inner">
+    <div class="h2" style="color:var(--cream)">Make it the gift set.</div>
+    <p style="max-width:46ch;margin:14px auto 26px;font-size:16px">Three charms, one clean box, free shipping. Sorted for birthdays and secret santa.</p>
+    <a href="#bundles" class="cta" style="background:var(--cream);color:var(--ink);border-color:var(--cream)">Choose your set</a>
+  </div></div>
+</div>
+
+<script>
+(function(){
+  var root = document.currentScript.closest('body') || document;
+  // gallery thumbs
+  document.querySelectorAll('.gallery__thumbs .thumb').forEach(function(t){
+    t.addEventListener('click', function(){
+      var full = t.getAttribute('data-full'); var img = document.getElementById('pdpMainImg');
+      if(full && img){ img.src = full; }
+    });
+  });
+  // colorway
+  document.querySelectorAll('.swatch').forEach(function(s){
+    s.addEventListener('click', function(){
+      document.querySelectorAll('.swatch').forEach(function(x){x.setAttribute('aria-checked','false');});
+      s.setAttribute('aria-checked','true');
+      var name = s.dataset.name;
+      var wn = document.getElementById('wayname'); if(wn) wn.textContent = name;
+      var ci = document.getElementById('colorwayInput'); if(ci) ci.value = name;
+    });
+  });
+  // tier -> variant
+  document.querySelectorAll('.tier').forEach(function(t){
+    t.addEventListener('click', function(){
+      document.querySelectorAll('.tier').forEach(function(x){x.setAttribute('aria-checked','false');});
+      t.setAttribute('aria-checked','true');
+      var vid = t.dataset.vid, price = t.dataset.price;
+      if(vid){ var vi = document.getElementById('variantId'); if(vi) vi.value = vid; }
+      if(price){
+        var p = document.getElementById('price'); if(p) p.textContent = price;
+        var cp = document.getElementById('ctaPrice'); if(cp) cp.textContent = price;
+        var was = document.querySelector('.prices .was');
+        if(was){ if(t.dataset.hascompare === '1'){ was.textContent = t.dataset.compare; was.style.display=''; } else { was.style.display='none'; } }
+      }
+    });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Charmé Product",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Product (defaults to the page's product)" }
+  ]
+}
+{% endschema %}

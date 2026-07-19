@@ -1,0 +1,4 @@
+{
+  "sections": { "main": { "type": "charme-story", "settings": {} } },
+  "order": ["main"]
+}

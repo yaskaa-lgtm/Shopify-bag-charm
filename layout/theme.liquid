@@ -319,6 +319,12 @@
         document.documentElement.classList.add('shopify-design-mode');
       }
     </script>
+
+    {%- comment -%} Charmé global styling: fonts + shared stylesheet on every page {%- endcomment -%}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+    {{ 'charme.css' | asset_url | stylesheet_tag }}
   </head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
@@ -330,10 +336,9 @@
       {%- render 'cart-drawer' -%}
     {%- endif -%}
 
-    {%- comment -%} Charmé homepage ships its own header/footer, so Dawn's are suppressed on the index. {%- endcomment -%}
-    {%- unless request.page_type == 'index' -%}
-      {% sections 'header-group' %}
-    {%- endunless -%}
+    {%- comment -%} Charmé uses its own header/footer sitewide; Dawn's header-group/footer-group are intentionally not rendered. {%- endcomment -%}
+    {% render 'charme-svgdefs' %}
+    {% render 'charme-header' %}
 
     <main
       id="MainContent"
@@ -345,9 +350,7 @@
       {{ content_for_layout }}
     </main>
 
-    {%- unless request.page_type == 'index' -%}
-      {% sections 'footer-group' %}
-    {%- endunless -%}
+    {% render 'charme-footer' %}
 
     <ul hidden>
       <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>

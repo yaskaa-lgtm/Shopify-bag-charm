@@ -1,0 +1,71 @@
+{%- comment -%} Charmé cart page, wired to the real Shopify cart. {%- endcomment -%}
+{%- liquid
+  assign threshold = 3500
+  assign remaining = threshold | minus: cart.total_price
+  assign pct = cart.total_price | times: 100 | divided_by: threshold
+  if pct > 100
+    assign pct = 100
+  endif
+-%}
+
+<div class="wrap"><div class="crumb"><a href="{{ routes.root_url }}">Home</a> / Your Bag</div></div>
+
+<div class="wrap">
+  <div class="h2" style="margin-bottom:6px">Your bag</div>
+
+  {%- if cart.item_count == 0 -%}
+    <p style="padding:20px 0 60px;font-size:16px;color:#3a3733">Your bag is empty. <a href="{{ routes.all_products_collection_url }}" style="color:var(--persimmon);text-decoration:underline;font-weight:700">Shop the charm →</a></p>
+  {%- else -%}
+    <form action="{{ routes.cart_url }}" method="post" class="cartwrap">
+      <!-- left: items -->
+      <div>
+        <div class="ship-progress">
+          {%- if remaining > 0 -%}
+            <p>You're {{ remaining | money }} away from free shipping 🎉</p>
+          {%- else -%}
+            <p>You've unlocked free US shipping 🎉</p>
+          {%- endif -%}
+          <div class="bar"><i style="width:{{ pct }}%"></i></div>
+        </div>
+
+        {%- for item in cart.items -%}
+          <div class="line">
+            <div class="line__img">
+              {%- if item.image -%}{{ item.image | image_url: width: 200 | image_tag: loading: 'lazy', alt: item.title }}{%- else -%}<svg viewBox="0 0 120 120"><use href="#charm"/></svg>{%- endif -%}
+            </div>
+            <div class="line__info">
+              <b>{{ item.product.title }}</b>
+              {%- unless item.variant.title contains 'Default' -%}<small>{{ item.variant.title }}</small>{%- endunless -%}
+              {%- for p in item.properties -%}{%- unless p.last == blank -%}<small>{{ p.first }}: {{ p.last }}</small>{%- endunless -%}{%- endfor -%}
+              <div class="qty">
+                <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity={{ item.quantity | minus: 1 }}" aria-label="decrease">–</a>
+                <span>{{ item.quantity }}</span>
+                <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity={{ item.quantity | plus: 1 }}" aria-label="increase">+</a>
+              </div>
+            </div>
+            <div class="line__price">{{ item.final_line_price | money }}</div>
+          </div>
+        {%- endfor -%}
+
+        <p style="margin-top:22px"><a href="{{ routes.all_products_collection_url }}" style="font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:13px;color:var(--patina)">← Keep shopping</a></p>
+      </div>
+
+      <!-- right: summary -->
+      <div class="summary">
+        <h3>Order summary</h3>
+        <div class="row"><span>Subtotal</span><span>{{ cart.total_price | money }}</span></div>
+        <div class="row"><span>Shipping</span><span>Calculated at checkout</span></div>
+        <div class="row"><span>Est. delivery</span><span>8–15 days, tracked</span></div>
+        <div class="row total"><span>Total</span><span>{{ cart.total_price | money }}</span></div>
+        <button type="submit" name="checkout" class="cta" style="width:100%;justify-content:center;margin-top:18px">Checkout</button>
+        <p class="fineprint">Taxes calculated at checkout. Secure payment via Shopify Payments.</p>
+      </div>
+    </form>
+  {%- endif -%}
+</div>
+
+<div style="border-top:2px solid var(--ink)"></div>
+
+{% schema %}
+{ "name": "Charmé Cart", "settings": [] }
+{% endschema %}

@@ -1,0 +1,20 @@
+{%- comment -%} Shared Charmé announcement + marquee + header. Rendered once per page from layout. {%- endcomment -%}
+<div class="announce">Free US shipping over $35 · Ships in 8–15 days</div>
+
+<div class="marquee" aria-hidden="true"><div class="marquee__track">
+  <span>ELEVATED LITTLE CHARMS</span><span class="dot">◆</span><span>REAL LEATHER, NOT PLASTIC</span><span class="dot">◆</span><span>CLIP · STACK · GIFT</span><span class="dot">◆</span><span>SHIPS FROM THE US</span><span class="dot">◆</span>
+  <span>ELEVATED LITTLE CHARMS</span><span class="dot">◆</span><span>REAL LEATHER, NOT PLASTIC</span><span class="dot">◆</span><span>CLIP · STACK · GIFT</span><span class="dot">◆</span><span>SHIPS FROM THE US</span><span class="dot">◆</span>
+</div></div>
+
+<header>
+  <div class="wrap nav">
+    <a href="{{ routes.root_url }}" class="logo" aria-label="Charmé home">CHARM<span class="e-wrap">É<svg class="clasp" viewBox="0 0 40 50"><use href="#clasp"/></svg></span></a>
+    <nav class="nav__links">
+      <a href="{{ routes.all_products_collection_url }}"{% if request.path contains '/products' or request.path contains '/collections' %} class="active"{% endif %}>Shop</a>
+      <a href="{{ routes.all_products_collection_url }}">Bundles</a>
+      <a href="/pages/our-story">Our Story</a>
+      <a href="/pages/contact">Contact</a>
+    </nav>
+    <div class="nav__right"><a href="{{ routes.cart_url }}" class="bag">Bag · {{ cart.item_count }}</a></div>
+  </div>
+</header>

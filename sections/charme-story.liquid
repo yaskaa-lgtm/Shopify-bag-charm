@@ -1,0 +1,37 @@
+{%- comment -%} Charmé Our Story page. {%- endcomment -%}
+<div class="story-hero">
+  <div class="wrap">
+    <div class="kicker" style="color:var(--gold-hi)">Our story</div>
+    <div class="h2">Made for the bag you already love.</div>
+    <p>We started Charmé because a bag you love shouldn't need replacing to feel new. One elevated little charm, endless moods — that's the whole idea.</p>
+  </div>
+</div>
+
+<section class="story-body">
+  <div class="wrap">
+    <div class="cols">
+      <div class="prose">
+        <p>We're a small operation, so we keep it honest: real photos, clear shipping windows, and no invented family saga. We ship fast, we answer our email, and we'd rather sell you one charm you love than five you forget in a drawer.</p>
+        <p>Every charm is chosen for finish and feel — real materials over hollow plastic, because the detail is the whole point. It's the little thing people ask about before they ask where you got it.</p>
+      </div>
+      <div class="story-vis"><div class="charm-badge"><svg viewBox="0 0 120 120"><use href="#charm"/></svg></div></div>
+    </div>
+    <div class="values">
+      <div class="value"><b>Elevated, not cheap</b><p>Real materials over hollow plastic — the finish is the whole point.</p></div>
+      <div class="value"><b>Honest by default</b><p>Real photos, real delivery windows, real reviews. No dark patterns.</p></div>
+      <div class="value"><b>Small and fast</b><p>A studio, not a warehouse empire. Orders ship in 1–2 days.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="gift" style="background:var(--persimmon);color:var(--cream);text-align:center;border-bottom:2px solid var(--ink)">
+  <div class="wrap" style="padding:0"><div class="inner">
+    <div class="h2" style="color:var(--cream)">See what everyone's clipping on.</div>
+    <p>The elevated little charm that makes the bag you already love feel new again.</p>
+    <a href="{{ routes.all_products_collection_url }}" class="cta" style="background:var(--cream);color:var(--ink);border-color:var(--cream)">Shop the charm</a>
+  </div></div>
+</div>
+
+{% schema %}
+{ "name": "Charmé Story", "settings": [] }
+{% endschema %}

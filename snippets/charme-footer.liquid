@@ -1,0 +1,38 @@
+{%- comment -%} Shared Charmé footer marquee + footer. Rendered once per page from layout. {%- endcomment -%}
+<div class="foot-marq" aria-hidden="true"><div class="t">
+  <span class="logo">CHARMÉ</span><span class="logo">CHARMÉ</span><span class="logo">CHARMÉ</span><span class="logo">CHARMÉ</span>
+  <span class="logo">CHARMÉ</span><span class="logo">CHARMÉ</span><span class="logo">CHARMÉ</span><span class="logo">CHARMÉ</span>
+</div></div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot__logo logo">CHARM<span class="e-wrap">É<svg class="clasp" viewBox="0 0 40 50"><use href="#clasp"/></svg></span></div>
+    <div class="foot__grid">
+      <div>
+        <h5>Stick with your new bestie</h5>
+        <p style="font-size:14px;color:#cfc9bd;max-width:36ch">Elevated clip-on charms, shipped fast from a small studio. Delivery to the US: typically 8–15 days, tracked.</p>
+        {%- form 'customer', class: 'news' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <input type="email" name="contact[email]" placeholder="Email for 10% off" aria-label="Email address" required>
+          <button type="submit">Join</button>
+        {%- endform -%}
+      </div>
+      <div>
+        <h5>Shop</h5>
+        <a href="{{ routes.all_products_collection_url }}">The Charm</a>
+        <a href="{{ routes.all_products_collection_url }}">Bundles</a>
+        <a href="{{ routes.all_products_collection_url }}">Gift Sets</a>
+        <a href="/pages/our-story">Our Story</a>
+      </div>
+      <div>
+        <h5>Help</h5>
+        <a href="/pages/shipping-returns">Shipping &amp; Returns</a>
+        <a href="/pages/refund-policy">Refund Policy</a>
+        <a href="/pages/privacy-policy">Privacy Policy</a>
+        <a href="/pages/terms-of-service">Terms of Service</a>
+        <a href="/pages/contact">Contact</a>
+      </div>
+    </div>
+    <div class="foot__legal"><span>© {{ 'now' | date: '%Y' }} Charmé. All rights reserved.</span><span>Made for the bag you already love.</span></div>
+  </div>
+</footer>

@@ -3,10 +3,7 @@
     "charme_home": {
       "type": "charme-home",
       "settings": {
-        "announce_text": "Free US shipping over $35 · Ships in 8–15 days",
-        "eyebrow": "The it-girl bag charm · $24.99",
-        "trust_1": "Ships in 8–15 days, tracked",
-        "footer_blurb": "Elevated clip-on charms, shipped fast from a small studio. Delivery to the US: typically 8–15 days, tracked."
+        "eyebrow": "The it-girl bag charm · $24.99"
       }
     }
   },
