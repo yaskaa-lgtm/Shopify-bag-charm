@@ -266,3 +266,23 @@ footer{background:var(--ink);color:var(--cream);padding:52px 0 30px}
 .thumb img{width:100%;height:100%;object-fit:cover;border-radius:10px}
 .line__img img{width:100%;height:100%;object-fit:cover;border-radius:10px}
 .cta--disabled{opacity:.5;pointer-events:none}
+
+/* ===== SHOP / COLLECTION ===== */
+.shop-head{padding:40px 0 6px}
+.shop-head .h2{margin-bottom:6px}
+.shop-head p{color:#3a3733;font-size:15px}
+.shop-grid{display:grid;grid-template-columns:1fr;gap:18px;padding:24px 0 64px}
+@media(min-width:560px){.shop-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:900px){.shop-grid{grid-template-columns:repeat(3,1fr)}}
+.pcard{display:flex;flex-direction:column;border:2px solid var(--ink);border-radius:var(--radius-lg);overflow:hidden;background:var(--cream);transition:transform .15s ease}
+.pcard:hover{transform:translateY(-4px)}
+.pcard__img{aspect-ratio:1;background:var(--cream);border-bottom:2px solid var(--ink);position:relative;display:grid;place-items:center;overflow:hidden}
+.pcard__img img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.pcard__img svg{width:56%}
+.pcard__tag{position:absolute;top:12px;left:12px;background:var(--persimmon);color:var(--cream);font-family:var(--display);font-weight:800;text-transform:uppercase;letter-spacing:.06em;font-size:11px;padding:5px 10px;border-radius:8px;transform:rotate(-4deg);z-index:2}
+.pcard__body{padding:16px 18px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.pcard__body h3{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:18px;letter-spacing:-.01em}
+.pcard__price{display:flex;align-items:baseline;gap:8px;margin-top:auto}
+.pcard__price .now{font-family:var(--display);font-weight:900;font-size:20px}
+.pcard__price .was{text-decoration:line-through;color:var(--muted);font-size:14px}
+.pcard .buy{margin-top:6px}

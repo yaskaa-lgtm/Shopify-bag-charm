@@ -1,0 +1,59 @@
+{%- comment -%}
+  Charmé shop / collection page. On-brand product grid that reliably shows each
+  product's image (product.featured_image), independent of Dawn's card system.
+{%- endcomment -%}
+
+<div class="wrap">
+  <div class="crumb"><a href="{{ routes.root_url }}">Home</a> / {{ collection.title | default: 'Shop' }}</div>
+  <div class="shop-head">
+    <div class="h2">{{ collection.title | default: 'Shop the charm' }}</div>
+    <p>{{ collection.description | default: 'Elevated clip-on charms — swap them, stack them, gift them.' | strip_html }}</p>
+  </div>
+
+  {%- if collection.products.size == 0 -%}
+    <p style="padding:24px 0 64px;font-size:16px;color:#3a3733">
+      No products here yet. Add a product in your Shopify admin and it'll appear automatically.
+    </p>
+  {%- else -%}
+    <div class="shop-grid">
+      {%- for product in collection.products -%}
+        {%- assign v = product.selected_or_first_available_variant -%}
+        <div class="pcard">
+          <a href="{{ product.url }}" class="pcard__img" aria-label="{{ product.title | escape }}">
+            {%- if product.compare_at_price > product.price -%}<span class="pcard__tag">Sale</span>{%- endif -%}
+            {%- if product.featured_image -%}
+              {{ product.featured_image | image_url: width: 800 | image_tag:
+                loading: 'lazy',
+                alt: product.featured_image.alt | default: product.title,
+                widths: '300,500,700,800'
+              }}
+            {%- else -%}
+              <svg viewBox="0 0 120 120"><use href="#charm"/></svg>
+            {%- endif -%}
+          </a>
+          <div class="pcard__body">
+            <h3><a href="{{ product.url }}" style="color:inherit">{{ product.title }}</a></h3>
+            <div class="pcard__price">
+              <span class="now">{{ product.price | money }}</span>
+              {%- if product.compare_at_price > product.price -%}<span class="was">{{ product.compare_at_price | money }}</span>{%- endif -%}
+            </div>
+            {%- if product.available -%}
+              {%- form 'product', product -%}
+                <input type="hidden" name="id" value="{{ v.id }}">
+                <button type="submit" class="buy">Add to bag</button>
+              {%- endform -%}
+            {%- else -%}
+              <a href="{{ product.url }}" class="buy" style="opacity:.6">Sold out</a>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>
+
+<div style="border-top:2px solid var(--ink)"></div>
+
+{% schema %}
+{ "name": "Charmé Shop", "settings": [] }
+{% endschema %}
