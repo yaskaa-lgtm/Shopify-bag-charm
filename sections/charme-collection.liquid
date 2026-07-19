@@ -1,32 +1,53 @@
 {%- comment -%}
-  Charmé shop / collection page. On-brand product grid that reliably shows each
-  product's image (product.featured_image), independent of Dawn's card system.
+  Charmé Shop — fully editable in the theme Customizer.
+  Each product is a BLOCK: upload an image, set title/price/link right in the editor.
+  No need to create products in admin just to show them here.
+  (If you leave it empty, it falls back to your real store products.)
 {%- endcomment -%}
 
 <div class="wrap">
-  <div class="crumb"><a href="{{ routes.root_url }}">Home</a> / {{ collection.title | default: 'Shop' }}</div>
+  <div class="crumb"><a href="{{ routes.root_url }}">Home</a> / {{ section.settings.heading | default: 'Shop' }}</div>
   <div class="shop-head">
-    <div class="h2">{{ collection.title | default: 'Shop the charm' }}</div>
-    <p>{{ collection.description | default: 'Elevated clip-on charms — swap them, stack them, gift them.' | strip_html }}</p>
+    <div class="h2">{{ section.settings.heading | default: 'Shop the charm' }}</div>
+    {%- if section.settings.subtext != blank -%}<p>{{ section.settings.subtext }}</p>{%- endif -%}
   </div>
 
-  {%- if collection.products.size == 0 -%}
-    <p style="padding:24px 0 64px;font-size:16px;color:#3a3733">
-      No products here yet. Add a product in your Shopify admin and it'll appear automatically.
-    </p>
-  {%- else -%}
-    <div class="shop-grid">
+  {%- if section.blocks.size > 0 -%}
+    {%- comment -%} Manual product cards — you add these in the Customizer {%- endcomment -%}
+    <div class="shop-grid" style="grid-template-columns:repeat({{ section.settings.columns }},1fr)">
+      {%- for block in section.blocks -%}
+        <div class="pcard" {{ block.shopify_attributes }}>
+          <a href="{{ block.settings.link | default: routes.all_products_collection_url }}" class="pcard__img" aria-label="{{ block.settings.title | escape }}">
+            {%- if block.settings.tag != blank -%}<span class="pcard__tag">{{ block.settings.tag }}</span>{%- endif -%}
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy', alt: block.settings.title | default: 'Charmé product', widths: '300,500,700,800' }}
+            {%- else -%}
+              <svg viewBox="0 0 120 120"><use href="#charm"/></svg>
+            {%- endif -%}
+          </a>
+          <div class="pcard__body">
+            <h3><a href="{{ block.settings.link | default: routes.all_products_collection_url }}" style="color:inherit">{{ block.settings.title | default: 'The Charm' }}</a></h3>
+            {%- if block.settings.subtitle != blank -%}<div class="save" style="font-size:12px;font-weight:700;color:var(--persimmon);text-transform:uppercase;letter-spacing:.04em">{{ block.settings.subtitle }}</div>{%- endif -%}
+            <div class="pcard__price">
+              <span class="now">{{ block.settings.price | default: '$24.99' }}</span>
+              {%- if block.settings.compare_at != blank -%}<span class="was">{{ block.settings.compare_at }}</span>{%- endif -%}
+            </div>
+            <a href="{{ block.settings.link | default: routes.all_products_collection_url }}" class="buy">{{ block.settings.button_label | default: 'Add to bag' }}</a>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+  {%- elsif collection.products.size > 0 -%}
+    {%- comment -%} Fallback: real Shopify products from the collection {%- endcomment -%}
+    <div class="shop-grid" style="grid-template-columns:repeat({{ section.settings.columns }},1fr)">
       {%- for product in collection.products -%}
         {%- assign v = product.selected_or_first_available_variant -%}
         <div class="pcard">
           <a href="{{ product.url }}" class="pcard__img" aria-label="{{ product.title | escape }}">
             {%- if product.compare_at_price > product.price -%}<span class="pcard__tag">Sale</span>{%- endif -%}
             {%- if product.featured_image -%}
-              {{ product.featured_image | image_url: width: 800 | image_tag:
-                loading: 'lazy',
-                alt: product.featured_image.alt | default: product.title,
-                widths: '300,500,700,800'
-              }}
+              {{ product.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: product.title, widths: '300,500,700,800' }}
             {%- else -%}
               <svg viewBox="0 0 120 120"><use href="#charm"/></svg>
             {%- endif -%}
@@ -49,11 +70,50 @@
         </div>
       {%- endfor -%}
     </div>
+
+  {%- else -%}
+    <p style="padding:24px 0 64px;font-size:16px;color:#3a3733">
+      Add products in the theme editor (Customize → Shop → Add product), or create products in your Shopify admin — they'll appear here automatically.
+    </p>
   {%- endif -%}
 </div>
 
 <div style="border-top:2px solid var(--ink)"></div>
 
 {% schema %}
-{ "name": "Charmé Shop", "settings": [] }
+{
+  "name": "Charmé Shop",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Shop the charm" },
+    { "type": "text", "id": "subtext", "label": "Subtext", "default": "Elevated clip-on charms — swap them, stack them, gift them." },
+    { "type": "range", "id": "columns", "min": 1, "max": 4, "step": 1, "label": "Columns (desktop)", "default": 3 }
+  ],
+  "blocks": [
+    {
+      "type": "product_card",
+      "name": "Product",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Product image" },
+        { "type": "text", "id": "tag", "label": "Corner badge", "info": "e.g. Bestseller, Save $11 (optional)" },
+        { "type": "text", "id": "title", "label": "Title", "default": "The Charm" },
+        { "type": "text", "id": "subtitle", "label": "Subtitle (optional)", "default": "One clip. A whole new bag." },
+        { "type": "text", "id": "price", "label": "Price", "default": "$24.99" },
+        { "type": "text", "id": "compare_at", "label": "Compare-at price (optional)", "default": "$39" },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "Add to bag" },
+        { "type": "url", "id": "link", "label": "Button / card link", "info": "Link to your product page or add-to-cart URL" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Charmé Shop",
+      "blocks": [
+        { "type": "product_card", "settings": { "tag": "Bestseller", "title": "The Charm — Single", "subtitle": "One clip. A whole new bag.", "price": "$24.99", "compare_at": "$39" } },
+        { "type": "product_card", "settings": { "tag": "Save $11", "title": "Mix & Match — x2", "subtitle": "Two moods, one strap", "price": "$39", "compare_at": "$50" } },
+        { "type": "product_card", "settings": { "tag": "Free ship", "title": "Gift Set — x3", "subtitle": "Sorted for three people (or you)", "price": "$54", "compare_at": "$75" } }
+      ]
+    }
+  ]
+}
 {% endschema %}

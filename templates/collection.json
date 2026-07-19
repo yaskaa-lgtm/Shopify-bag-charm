@@ -2,7 +2,17 @@
   "sections": {
     "main": {
       "type": "charme-collection",
-      "settings": {}
+      "blocks": {
+        "p1": { "type": "product_card", "settings": { "tag": "Bestseller", "title": "The Charm — Single", "subtitle": "One clip. A whole new bag.", "price": "$24.99", "compare_at": "$39" } },
+        "p2": { "type": "product_card", "settings": { "tag": "Save $11", "title": "Mix & Match — x2", "subtitle": "Two moods, one strap", "price": "$39", "compare_at": "$50" } },
+        "p3": { "type": "product_card", "settings": { "tag": "Free ship", "title": "Gift Set — x3", "subtitle": "Sorted for three people (or you)", "price": "$54", "compare_at": "$75" } }
+      },
+      "block_order": ["p1", "p2", "p3"],
+      "settings": {
+        "heading": "Shop the charm",
+        "subtext": "Elevated clip-on charms — swap them, stack them, gift them.",
+        "columns": 3
+      }
     }
   },
   "order": ["main"]
