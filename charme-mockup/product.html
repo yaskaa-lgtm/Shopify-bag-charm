@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Charm — CHARMÉ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="charme.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <g id="clasp"><ellipse cx="20" cy="9" rx="8" ry="8" fill="none" stroke="#C9A227" stroke-width="4"/><rect x="14" y="15" width="12" height="30" rx="6" fill="#C9A227" stroke="#1C1B19" stroke-width="1.5"/><rect x="17.5" y="22" width="5" height="16" rx="2.5" fill="#1C1B19" opacity=".25"/></g>
+  <g id="charm"><circle cx="60" cy="60" r="52" fill="#C9A227" stroke="#1C1B19" stroke-width="4"/><ellipse cx="60" cy="16" rx="10" ry="10" fill="none" stroke="#1C1B19" stroke-width="4"/><text x="60" y="82" font-family="Archivo,sans-serif" font-weight="900" font-size="58" fill="#1C1B19" text-anchor="middle">é</text></g>
+</defs></svg>
+
+<div class="announce">Free US shipping over $35 · Ships in 8–15 days</div>
+<div class="marquee" aria-hidden="true"><div class="marquee__track">
+  <span>ELEVATED LITTLE CHARMS</span><span class="dot">◆</span><span>METAL + ENAMEL</span><span class="dot">◆</span><span>SWAP · STACK · GIFT</span><span class="dot">◆</span><span>SHIPS FROM THE US</span><span class="dot">◆</span>
+  <span>ELEVATED LITTLE CHARMS</span><span class="dot">◆</span><span>METAL + ENAMEL</span><span class="dot">◆</span><span>SWAP · STACK · GIFT</span><span class="dot">◆</span><span>SHIPS FROM THE US</span><span class="dot">◆</span>
+</div></div>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="logo">CHARM<span class="e-wrap">É<svg class="clasp" viewBox="0 0 40 50"><use href="#clasp"/></svg></span></a>
+    <nav class="nav__links">
+      <a href="product.html" class="active">Shop</a>
+      <a href="product.html#bundles">Bundles</a>
+      <a href="index.html#gift">Gifts</a>
+      <a href="story.html">Our Story</a>
+    </nav>
+    <div class="nav__right"><a href="cart.html" class="bag">Bag · 0</a></div>
+  </div>
+</header>
+
+<div class="wrap"><div class="crumb"><a href="index.html">Home</a> / <a href="product.html">Shop</a> / The Charm</div></div>
+
+<!-- PRODUCT -->
+<div class="wrap">
+  <div class="pdp">
+    <!-- gallery -->
+    <div class="gallery">
+      <!-- Main visual swaps to the first selected design (charme.js). IMAGE SLOT: charme-charm-<design>-1080.jpg -->
+      <div class="gallery__main" id="pdpMain"><div class="charm-badge"><svg viewBox="0 0 120 120"><use href="#charm"/></svg></div></div>
+      <div class="gallery__thumbs">
+        <!-- IMAGE SLOTS: product-main / on-bag lifestyle / scale-in-hand / packaging -->
+        <div class="thumb"><svg viewBox="0 0 120 120"><use href="#charm"/></svg></div>
+        <div class="thumb"><svg viewBox="0 0 120 120"><use href="#charm"/></svg></div>
+        <div class="thumb"><svg viewBox="0 0 120 120"><use href="#charm"/></svg></div>
+        <div class="thumb"><svg viewBox="0 0 120 120"><use href="#charm"/></svg></div>
+      </div>
+      <p style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em">4 image slots · main, on-bag lifestyle, scale-in-hand, packaging</p>
+    </div>
+
+    <!-- buy box -->
+    <div class="buybox" id="bundles">
+      <div class="eyebrow">The it-girl bag charm</div>
+      <h1 id="pdpTitle">Single charm</h1>
+      <div class="stars">★★★★★ <small>4.9 · sample rating</small></div>
+      <div class="prices"><span class="now" id="pdpPrice">$24.99</span><span class="was">$39</span><span class="off">Save 36%</span></div>
+      <p class="sub">Elevated clip-on charm in weighted metal + enamel (zinc-alloy, under 100g). Refreshes any bag in one clip — swap it, stack it, gift it. <span id="pdpSubtitle" style="color:var(--persimmon);font-weight:700"></span></p>
+
+      <!-- CHARM-DESIGN PICKER (all 6 visible; multi-select for x2/x3 sets) -->
+      <div class="opt-label">Design</div>
+      <p class="picker-help" id="pickerHelp">Choose your design</p>
+      <div class="designs" id="designGrid" role="radiogroup" aria-label="Charm design"><!-- rendered by charme.js --></div>
+
+      <!-- SET SELECTOR -->
+      <div class="opt-label">Choose your set</div>
+      <div class="tiers" role="radiogroup" aria-label="Set">
+        <div class="tier" data-set="single" aria-checked="true" role="radio" tabindex="0"><div class="l"><b>Single charm</b><small>One clip. A whole new bag.</small></div><div class="r">$24.99</div></div>
+        <div class="tier" data-set="x2" aria-checked="false" role="radio" tabindex="0"><div class="l"><b>Mix &amp; Match — x2</b><small>Pick 2 designs · save $11 · free shipping</small></div><div class="r">$39</div></div>
+        <div class="tier" data-set="x3" aria-checked="false" role="radio" tabindex="0"><div class="l"><b>Gift Set — x3</b><small>Pick 3 designs · save $21 · best value</small></div><div class="r">$54</div></div>
+      </div>
+
+      <!-- QUANTITY -->
+      <div class="qtybox">
+        <div class="opt-label">Quantity</div>
+        <div class="stepper"><button type="button" id="qtyDec" aria-label="decrease quantity">–</button><span id="pdpQty">1</span><button type="button" id="qtyInc" aria-label="increase quantity">+</button></div>
+      </div>
+
+      <!-- ADD TO BAG (working prototype — see charme.js) -->
+      <button type="button" id="pdpAdd" class="cta" style="width:100%;justify-content:center;margin-top:14px">Add to bag · <span id="pdpCtaPrice">$24.99</span></button>
+
+      <!-- NOTIFY ME (revealed when the sold-out design is chosen) -->
+      <div class="notify-row" id="notifyRow">
+        <input type="email" id="notifyEmail" placeholder="Email me when it's back" aria-label="Email for restock">
+        <button type="button" id="notifyBtn" class="buy" style="width:auto;padding:12px 18px">Notify me</button>
+      </div>
+
+      <div class="reassure"><span>Ships in 8–15 days</span><span>Tracked delivery</span><span>30-day returns</span></div>
+      <p style="font-size:13px;color:var(--muted);margin-top:14px">Delivery to the US: typically 8–15 days after dispatch, tracked. Exact window shown at checkout.</p>
+    </div>
+  </div>
+</div>
+
+<!-- DETAILS & CARE + SHIPPING accordions (reuse existing .acc) -->
+<section class="block">
+  <div class="wrap">
+    <div class="kicker">The details</div>
+    <div class="h2">Details &amp; care</div>
+    <div class="acc">
+      <details open><summary>What's it made of?</summary><div class="body">Zinc-alloy hardware with enamel and glass detailing. Weighted to feel substantial (under 100g), not tinny. Universal lobster clasp.</div></details>
+      <details><summary>Will it fit my bag?</summary><div class="body">Yes — the lobster clasp fits totes, handbags, backpacks, and keyrings.</div></details>
+      <details><summary>Care</summary><div class="body">Wipe with a dry cloth and avoid submerging it. The enamel keeps its color with basic care.</div></details>
+    </div>
+    <div class="h2" style="margin-top:36px">Shipping &amp; payment</div>
+    <div class="acc">
+      <details><summary>Shipping time</summary><div class="body">Ships in 1–2 business days; delivery to the US typically 8–15 days after dispatch, tracked. Free over $35.</div></details>
+      <details><summary>Returns</summary><div class="body">30-day returns on unused items in original condition. See our <a href="refund.html" style="color:var(--persimmon);text-decoration:underline">Refund Policy</a>.</div></details>
+      <details><summary>Payment</summary><div class="body">Secure checkout via Shopify Payments. Taxes calculated at checkout.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT editorial band (reuse gift styling) -->
+<div class="gift" style="background:var(--patina);color:var(--cream);text-align:center;border-bottom:2px solid var(--ink)">
+  <div class="wrap" style="padding:0"><div class="inner">
+    <div class="h2" style="color:var(--cream)">Not a toy. A statement.</div>
+    <p>A $300 bag shouldn't need replacing to feel new. One clip-on charm, endless moods — elevated metal and enamel, never plastic.</p>
+  </div></div>
+</div>
+
+<!-- TRUST BAR (reuse existing ink trust bar) -->
+<div class="trust"><div class="wrap" style="padding:0"><div class="trust__grid">
+  <div>Ships in <b>8–15 days</b>, tracked</div>
+  <div><b>Metal + enamel</b> — not plastic</div>
+  <div>Arrives <b>gift-ready</b></div>
+</div></div></div>
+
+<!-- REVIEWS -->
+<section class="block">
+  <div class="wrap">
+    <div class="kicker">What buyers say</div>
+    <div class="h2">Verified &amp; obsessed</div>
+    <div class="reviews">
+      <div class="review"><div class="stars">★★★★★</div><p>"Way heavier and nicer than I expected — looks like it cost triple. Everyone at brunch asked."</p><div class="who">★ Verified buyer</div></div>
+      <div class="review"><div class="stars">★★★★★</div><p>"Bought one, came back for the gift set. The little box makes it feel expensive."</p><div class="who">★ Verified buyer</div></div>
+      <div class="review"><div class="stars">★★★★★</div><p>"Clips on solid, hasn't scratched my bag, and it actually photographs. Rare."</p><div class="who">★ Verified buyer</div></div>
+    </div>
+    <p style="font-size:12px;color:var(--muted);margin-top:16px">Sample reviews shown — replace with real Judge.me reviews before launch (FTC).</p>
+  </div>
+</section>
+
+<!-- YOU MAY ALSO LIKE — each routes back into the PDP with that design pre-selected -->
+<section class="block">
+  <div class="wrap">
+    <div class="kicker">More to clip on</div>
+    <div class="h2">You may also like</div>
+    <div class="ymal">
+      <a href="product.html?charm=cherry"><div class="ymal__img"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="#E4572E" stroke="#1C1B19" stroke-width="4"/><ellipse cx="60" cy="16" rx="10" ry="10" fill="none" stroke="#1C1B19" stroke-width="4"/><text x="60" y="82" font-family="Archivo,sans-serif" font-weight="900" font-size="58" fill="#1C1B19" text-anchor="middle">é</text></svg></div><span>Cherry</span></a>
+      <a href="product.html?charm=lemon"><div class="ymal__img"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="#C9A227" stroke="#1C1B19" stroke-width="4"/><ellipse cx="60" cy="16" rx="10" ry="10" fill="none" stroke="#1C1B19" stroke-width="4"/><text x="60" y="82" font-family="Archivo,sans-serif" font-weight="900" font-size="58" fill="#1C1B19" text-anchor="middle">é</text></svg></div><span>Lemon</span></a>
+      <a href="product.html?charm=green-apple"><div class="ymal__img"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="#4E7C82" stroke="#1C1B19" stroke-width="4"/><ellipse cx="60" cy="16" rx="10" ry="10" fill="none" stroke="#1C1B19" stroke-width="4"/><text x="60" y="82" font-family="Archivo,sans-serif" font-weight="900" font-size="58" fill="#1C1B19" text-anchor="middle">é</text></svg></div><span>Green Apple</span></a>
+      <a href="product.html?charm=golden-heart"><div class="ymal__img"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="#C9A227" stroke="#1C1B19" stroke-width="4"/><ellipse cx="60" cy="16" rx="10" ry="10" fill="none" stroke="#1C1B19" stroke-width="4"/><text x="60" y="82" font-family="Archivo,sans-serif" font-weight="900" font-size="58" fill="#1C1B19" text-anchor="middle">é</text></svg></div><span>Golden Heart</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER MARQUEE -->
+<div class="foot-marq" aria-hidden="true"><div class="t">
+  <span class="logo">CHARMÉ</span><span class="logo">CHARMÉ</span><span class="logo">CHARMÉ</span><span class="logo">CHARMÉ</span>
+  <span class="logo">CHARMÉ</span><span class="logo">CHARMÉ</span><span class="logo">CHARMÉ</span><span class="logo">CHARMÉ</span>
+</div></div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot__logo logo">CHARM<span class="e-wrap">É<svg class="clasp" viewBox="0 0 40 50"><use href="#clasp"/></svg></span></div>
+    <div class="foot__grid">
+      <div><h5>Stick with your new bestie</h5><p style="font-size:14px;color:#cfc9bd;max-width:36ch">Elevated clip-on charms, shipped fast from a small studio. Delivery to the US: typically 8–15 days, tracked.</p><div class="news"><input type="email" placeholder="Email for 10% off" aria-label="Email address"><button>Join</button></div></div>
+      <div><h5>Shop</h5><a href="product.html">The Charm</a><a href="product.html#bundles">Bundles</a><a href="product.html">Gift Sets</a><a href="index.html#colorways">Designs</a></div>
+      <div><h5>Help</h5><a href="shipping.html">Shipping &amp; Returns</a><a href="refund.html">Refund Policy</a><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Service</a><a href="contact.html">Contact</a></div>
+    </div>
+    <div class="foot__legal"><span>© 2026 Charmé. All rights reserved.</span><span>Made for the bag you already love.</span></div>
+  </div>
+</footer>
+
+<script src="charme.js" defer></script>
+</body>
+</html>
